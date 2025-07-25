@@ -1,13 +1,13 @@
 module "azurerm_resource_group" {
   source              = "../module/azurerm_resource_group"
   resource_group_name = "soumya-rg"
-  location            = "West Europe"
+  location            = "Australia Central"
 }
 
 module "azurerm_virtual_network" {
   source                       = "../module/azurerm_virtual_network"
   azurerm_virtual_network_name = "soumya_vnet"
-  location                     = "West Europe"
+  location                     = "Australia Central"
   resource_group_name          = "soumya-rg"
   address_space                = ["10.0.0.0/16"]
   depends_on                   = [module.azurerm_resource_group]
@@ -35,7 +35,7 @@ module "frontend_public_ip" {
   source              = "../module/azurerm_public_ip"
   public_ip_name      = "soumya_pip"
   resource_group_name = "soumya-rg"
-  location    = "West Europe"
+  location    = "Australia Central"
   depends_on          = [module.azurerm_virtual_network]
 }
 
@@ -43,14 +43,14 @@ module "backend_public_ip" {
   source              = "../module/azurerm_public_ip"
   public_ip_name      = "soumya-pip-backend"
   resource_group_name = "soumya-rg"
-  location            = "West Europe"
+  location            = "Australia Central"
     depends_on          = [module.azurerm_virtual_network]
 }
 module "azurerm_virtual_machine_frontend" {
   depends_on = [module.azurerm_frontend_subnet,module.frontend_public_ip,module.azurerm_virtual_network,module.azurerm_resource_group]
   source                   = "../module/azurerm_virtual_machine"
   virtual_machine_name     = "todoFrontendVM"
-  location                 = "West Europe"
+  location                 = "Australia Central"
   resource_group_name      = "soumya-rg"
   subnet_name              = "soumya-fsubnet"
   virtual_network_name     = "soumya_vnet"
@@ -71,7 +71,7 @@ module "azurerm_virtual_machine_backend" {
   depends_on               = [module.azurerm_backend_subnet,module.backend_public_ip,module.azurerm_virtual_network,module.azurerm_resource_group]
   source                   = "../module/azurerm_virtual_machine"
   virtual_machine_name     = "todobackedndVM"
-  location                 = "West Europe"
+  location                 = "Australia Central"
   resource_group_name      = "soumya-rg"
   subnet_name              = "soumya-bsubnet"
   virtual_network_name     = "soumya_vnet"
@@ -90,7 +90,7 @@ module "azurerm_virtual_machine_backend" {
 module "azurerm_sql_server" {
   source                   = "../module/azurerm_sql_server"
   mssql_server_name        = "soumya-sql-server"
-  resource_group_name      = "soumya-rg"
+  resource_group_name      = "Australia Central"
   resource_group_location  = "West Europe"
   admin_username           = "sqladmin"
   admin_password           = "SqlAdmin@1234"
