@@ -90,8 +90,8 @@ module "azurerm_virtual_machine_backend" {
 module "azurerm_sql_server" {
   source                   = "../module/azurerm_sql_server"
   mssql_server_name        = "soumya-sql-server"
-  resource_group_name      = "Australia Central"
-  resource_group_location  = "West Europe"
+  resource_group_name      = "soumya-rg"
+  resource_group_location  = "Australia Central"
   admin_username           = "sqladmin"
   admin_password           = "SqlAdmin@1234"
   depends_on               = [module.azurerm_resource_group]
